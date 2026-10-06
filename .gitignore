@@ -1,0 +1,34 @@
+# Python: bytecode, caches e ferramentas de teste
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Ambientes e dependencias locais
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+Untitled*.ipynb
+
+# Arquivos gerados pela simulacao e validacoes temporarias
+resultados/
+tmp/
+
+# Configuracoes locais de editores e sistema operacional
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Credenciais e configuracoes locais
+.env
+.env.*
+!.env.example
