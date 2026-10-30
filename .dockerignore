@@ -1,7 +1,0 @@
-__pycache__/
-*.py[cod]
-.ipynb_checkpoints/
-.venv/
-resultados/
-tmp/
-Untitled.ipynb

@@ -41,30 +41,3 @@ py -m jupyter lab
 ```
 
 No Jupyter, abra `etapa1_ising.ipynb`.
-
-## Rodar com Docker
-
-Com Docker Desktop instalado e em execucao:
-
-```powershell
-docker build -t ising-etapa1 .
-docker run --rm -v "${PWD}/resultados:/app/resultados" ising-etapa1
-```
-
-O segundo comando monta a pasta local `resultados/` no conteiner, para que o
-PNG e o GIF sejam preservados no seu computador.
-
-Para executar apenas os testes dentro do conteiner:
-
-```powershell
-docker run --rm ising-etapa1 python -m unittest discover -s tests
-```
-
-Para iniciar o Jupyter no conteiner:
-
-```powershell
-docker run --rm -p 8888:8888 -v "${PWD}:/app" ising-etapa1 `
-  jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
-```
-
-Abra o endereco exibido pelo Jupyter no navegador.
