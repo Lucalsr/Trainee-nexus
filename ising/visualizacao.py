@@ -92,3 +92,28 @@ def criar_animacao(
 
     imagens[0].save(caminho, save_all=True, append_images=imagens[1:], duration=120, loop=0)
     return caminho
+
+
+def salvar_grafico_observaveis(caminho: Path, dados: dict[str, np.ndarray], tc_teorico: float) -> Path:
+    """Plota energia, |m|, calor especifico e susceptibilidade contra T."""
+    plt, _ = _importar_matplotlib()
+    caminho = Path(caminho)
+    caminho.parent.mkdir(parents=True, exist_ok=True)
+
+    graficos = [
+        ("energia", "Energia por spin"),
+        ("magnetizacao", "Magnetizacao por spin |m|"),
+        ("calor_especifico", "Calor especifico C"),
+        ("susceptibilidade", "Susceptibilidade $\chi$"),
+    ]
+    fig, eixos = plt.subplots(2, 2, figsize=(10, 7), constrained_layout=True)
+    for eixo, (chave, rotulo) in zip(eixos.ravel(), graficos):
+        eixo.plot(dados["T"], dados[chave], "o-", markersize=4)
+        eixo.axvline(tc_teorico, color="red", linestyle="--", label=f"Tc teorico = {tc_teorico:.3f}")
+        eixo.set_xlabel("T")
+        eixo.set_ylabel(rotulo)
+        eixo.grid(alpha=0.3)
+    eixos[0, 0].legend()
+    fig.savefig(caminho, dpi=150)
+    plt.close(fig)
+    return caminho
